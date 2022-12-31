@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: web-tier
+  labels:
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+  namespace: web-tier
+data:
+  default.conf: |
+   server {
+     listen 80;
+     location / {
+        proxy_http_version 1.1;
+        proxy_pass http://app-tier-svc.app-tier.svc.cluster.local;
+               }
+          }
+   server {
+           listen 8080;
+           location /api {
+           api write=on;
+           allow 0.0.0.0/0;
+           deny  all;
+          }
+      location /dashboard.html {
+        root /usr/share/nginx/html;
+       }
+     }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-tier-deployment
+  namespace: web-tier
+spec:
+  selector:
+    matchLabels:
+      app: web-tier
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web-tier
+    spec:
+      containers:
+      - name: web-tier
+        image: giriraj789/np:v1
+        ports:
+        - containerPort: 80
+          name: http-web 
+        - containerPort: 8080
+          name: http-db
+        volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+          items:
+            - key: default.conf
+              path: default.conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-tier-svc
+  namespace: web-tier
+spec:
+  ports:
+  - port: 80
+    name: http-web
+    targetPort: http-web
+    protocol: TCP
+  selector:
+    app: web-tier
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-svc
+  namespace: web-tier
+spec:
+  ports:
+  - port: 8080
+    name: http-db
+    targetPort: http-db
+    protocol: TCP
+  selector:
+    app: web-tier
