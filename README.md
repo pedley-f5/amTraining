@@ -25,5 +25,5 @@ Spec
 - Subset 
   - traffic-policy
 
- 
-<img width="928" alt="image" src="https://user-images.githubusercontent.com/34051943/210194214-1aa924ad-4bf3-478b-ba26-fbb2815710a9.png">
+ <img width="907" alt="image" src="https://user-images.githubusercontent.com/34051943/210194740-243bbfbb-b18c-4620-b732-4e6c822589fc.png">
+
