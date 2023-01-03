@@ -1,12 +1,14 @@
 # amTraining
 AM training
 
-### CONTEXT 
+### CONTEXT
+- Frontend
 ```css
-Frontend web-tier-svc.web-tier.svc.cluster.local
+web-tier-svc.web-tier.svc.cluster.local
 ```
+- Backend
 ```css
-Backend app-tier-svc.app-tier.svc.cluster.local
+app-tier-svc.app-tier.svc.cluster.local
 ```
 
 
