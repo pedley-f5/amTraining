@@ -1,34 +1,37 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: db-gateway
+  name: db-secure-gw
   namespace: web-tier
 spec:
   selector:
-    istio: ingressgateway # use Istio default gateway implementation
+    istio: ingressgateway # use istio default ingress gateway
   servers:
   - port:
-      number: 80
-      name: http
-      protocol: HTTP
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: db-credential # must be the same as secret
     hosts:
-    - "ec2-52-66-71-101.ap-south-1.compute.amazonaws.com"
+    - ec2-52-66-71-101.ap-south-1.compute.amazonaws.com
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: dashboard-route
+  name: dashboard-route-vs
   namespace: web-tier
 spec:
   hosts:
   - ec2-52-66-71-101.ap-south-1.compute.amazonaws.com
   gateways:
-  - db-gateway
+  - db-securee-gw
   http:
   - match:
-    - port: 80
+    - port: 443
     route:
     - destination:
         host: dashboard-svc.web-tier.svc.cluster.local
-        port: 
+        port:
           number: 8080

@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: db-gateway
+  namespace: web-tier
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "ec2-52-66-71-101.ap-south-1.compute.amazonaws.com"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: dashboard-route-vs
+  namespace: web-tier
+spec:
+  hosts:
+  - ec2-52-66-71-101.ap-south-1.compute.amazonaws.com
+  gateways:
+  - db-gateway
+  http:
+  - match:
+    - port: 80
+    route:
+    - destination:
+        host: dashboard-svc.web-tier.svc.cluster.local
+        port: 
+          number: 8080

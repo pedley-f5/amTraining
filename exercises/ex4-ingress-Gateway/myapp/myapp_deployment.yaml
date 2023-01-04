@@ -1,0 +1,49 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  labels:
+    run: myapp
+spec:
+  ports:
+  - port: 443
+    protocol: TCP
+  selector:
+    run: myapp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  selector:
+    matchLabels:
+      run: myapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: nginx
+        ports:
+        - containerPort: 443
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx
+          readOnly: true
+        - name: myapp-certs
+          mountPath: /etc/myapp-certs
+          readOnly: true
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: myapp-configmap
+      - name: myapp-certs
+        secret:
+          secretName: myapp-certs
+
+
