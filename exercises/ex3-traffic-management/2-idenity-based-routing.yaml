@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: app-tier-identity-routing
+  name: identity-routing-vs
   namespace: app-tier
 spec:
   hosts:
@@ -19,4 +19,18 @@ spec:
     - destination:
         host: app-tier-svc.app-tier.svc.cluster.local
         subset: v2
-
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: app-destination
+  namespace: app-tier
+spec:
+  host: app-tier-svc.app-tier.svc.cluster.local 
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2

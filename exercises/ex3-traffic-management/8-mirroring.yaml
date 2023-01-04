@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mirroring-vs
+  namespace: app-tier
+spec:
+  hosts:
+    - app-tier-svc.app-tier.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: app-tier-svc.app-tier.svc.cluster.local
+        subset: v1
+      weight: 100
+    mirror:
+      host: app-tier-svc.app-tier.svc.cluster.local
+      subset: v2
+    mirrorPercentage:
+      value: 100.0
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: mirroring-dr
+  namespace: app-tier
+spec:
+  host: app-tier-svc.app-tier.svc.cluster.local
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+
