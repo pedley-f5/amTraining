@@ -1,0 +1,76 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+ name: myapp-se
+spec:
+ hosts:
+ - myapp.com
+ ports:
+ - number: 80
+   name: http
+   protocol: HTTP
+ resolution: DNS
+ endpoints:
+ - address: ec2-3-7-183-124.ap-south-1.compute.amazonaws.com
+   locality: green
+   ports:
+     http: 8181
+ location: MESH_EXTERNAL
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: istio-egressgateway
+spec:
+  selector:
+    istio: egressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - myapp.com
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: directing-myapp-through-egress-gateway
+spec:
+  hosts:
+  - myapp.com
+  gateways:
+  - istio-egressgateway
+  - mesh
+  http:
+  - match:
+    - gateways:
+      - mesh
+      port: 80
+    route:
+    - destination:
+        host: istio-egressgateway.istio-system.svc.cluster.local
+        subset: myapp
+        port:
+          number: 80
+      weight: 100
+  - match:
+    - gateways:
+      - istio-egressgateway
+      port: 80
+    route:
+    - destination:
+        host: myapp.com
+        port:
+          number: 80
+      weight: 100
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: dr-eg-subset-myapp
+spec:
+  host: istio-egressgateway.istio-system.svc.cluster.local
+  subsets:
+  - name: myapp
+
