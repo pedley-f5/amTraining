@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: green-vs-delay
+  namespace: test-tier
+spec:
+  hosts:
+    - ec2-3-7-183-124.ap-south-1.compute.amazonaws.com
+  http:
+  - fault:
+      delay:
+        fixedDelay: 7s
+        percentage:
+           value: 100
+    route:
+      - destination: 
+          host: ec2-3-7-183-124.ap-south-1.compute.amazonaws.com
+        weight: 100
+
