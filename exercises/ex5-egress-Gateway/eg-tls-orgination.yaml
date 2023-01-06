@@ -1,0 +1,31 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: green-se-eg-orig
+  namespace: test-tier
+spec:
+  hosts:
+  - ec2-3-7-183-124.ap-south-1.compute.amazonaws.com
+  ports:
+  - number: 8181
+    name: http-port
+    protocol: HTTP
+    targetPort: 443
+  - number: 443
+    name: https-port
+    protocol: HTTPS
+  resolution: DNS
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: eg-tls-origination
+  namespace: test-tier
+spec:
+  host: ec2-3-7-183-124.ap-south-1.compute.amazonaws.com
+  trafficPolicy:
+    portLevelSettings:
+    - port:
+        number: 8181
+      tls:
+        mode: SIMPLE # initiates HTTPS when accessing ec2-3-7-183-124.ap-south-1.compute.amazonaws.com
