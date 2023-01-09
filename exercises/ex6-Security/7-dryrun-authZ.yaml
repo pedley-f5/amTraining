@@ -1,0 +1,21 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: "dry-run-authz"
+  namespace: app-tier
+  annotations:
+    "istio.io/dry-run": "true"
+spec:
+  selector:
+    matchLabels:
+      app: app-tier
+  action: DENY
+  rules:
+  - from:
+    - source:
+        namespaces: ["web-tier"]
+          #principals: ["cluster.local/ns/web-tier/sa/defaut"]
+    to:
+    - operation:
+        methods: ["GET"]
+

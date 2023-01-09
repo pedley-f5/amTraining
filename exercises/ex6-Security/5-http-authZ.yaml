@@ -1,0 +1,19 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: "http-authz"
+  namespace: app-tier
+spec:
+  selector:
+    matchLabels:
+      app: app-tier
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        namespaces: ["web-tier"]
+          #principals: ["cluster.local/ns/web-tier/sa/defaut"]
+    to:
+    - operation:
+        methods: ["GET"]
+

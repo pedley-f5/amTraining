@@ -1,0 +1,17 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: "path-jwt-authz"
+  namespace: web-tier
+spec:
+  selector:
+    matchLabels:
+      app: web-tier
+  action: DENY
+  rules:
+  - from:
+    - source:
+        notRequestPrincipals: ["*"]
+    to:
+    - operation:
+        paths: ["/healthz"]

@@ -1,0 +1,19 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: "ip-authz"
+  namespace: app-tier
+spec:
+  selector:
+    matchLabels:
+      app: app-tier
+  action: DENY
+  rules:
+  - from:
+    - source:
+        ipBlocks: ["192.168.45.30/32"]
+        #namespaces: ["web-tier"]
+        #principals: ["cluster.local/ns/web-tier/sa/defaut"]
+    to:
+    - operation:
+        methods: ["GET"]
