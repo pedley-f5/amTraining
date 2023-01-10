@@ -10,7 +10,7 @@ web-tier-svc.web-tier.svc.cluster.local
 ```css
 app-tier-svc.app-tier.svc.cluster.local
 ```
-- TEST-TIER Testing pod with necessary tools !
+- TEST-TIER Testing pod for initiating application traffic 
  <img width="907" alt="image" src="https://user-images.githubusercontent.com/34051943/210194740-243bbfbb-b18c-4620-b732-4e6c822589fc.png">
  
 ## BUILDs Optional 
