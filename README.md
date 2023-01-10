@@ -48,5 +48,5 @@ curl -s https://raw.githubusercontent.com/learnbyseven/amTraining/main/exercises
 ```
 ### aM-Unnstall-ALL-Components-UDF
 ```css
-https://raw.githubusercontent.com/learnbyseven/amTraining/main/exercises/ex1-am-install/4-am-all-components-uninstall/uninstall_Aspenmesh_all.sh | bash
+curl -s https://raw.githubusercontent.com/learnbyseven/amTraining/main/exercises/ex1-am-install/4-am-all-components-uninstall/uninstall_Aspenmesh_all.sh | bash
 ```
