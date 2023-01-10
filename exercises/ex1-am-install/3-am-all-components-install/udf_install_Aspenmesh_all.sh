@@ -111,4 +111,4 @@ helm install istio-ingress manifests/charts/gateways/istio-ingress --namespace i
 sleep 3
 helm install aspen-mesh-add-ons manifests/charts/addons --namespace istio-system --values values.yaml
 sleep 3
-echo "*********Aspenmesh ALL components Installation for UDF Ends*********"
+echo "*********Aspenmesh ALL components Installation for UDF Ends Enjoy learning :) *********"
