@@ -54,6 +54,12 @@ global:
   multiCluster:
     clusterName: cluster1
   network: network1
+gateways:
+  istio-ingressgateway:
+    type: NodePort
+    autoscaleMin: 1
+  istio-egressgateway:
+    autoscaleMin: 1
 EOF
 sleep 1
 kubectl create ns istio-system
