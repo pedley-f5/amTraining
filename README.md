@@ -2,11 +2,11 @@
 Istio AM Fundamental Training 
 
 ### Application Architecture
-- Frontend
+- Frontend Application Service 
 ```css
 web-tier-svc.web-tier.svc.cluster.local
 ```
-- Backend
+- Backend Application Service
 ```css
 app-tier-svc.app-tier.svc.cluster.local
 ```
