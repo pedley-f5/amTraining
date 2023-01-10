@@ -2,14 +2,15 @@
 Istio AM Fundamental Training 
 
 ### Application Architecture
-- Frontend Application Service 
+- WEB-TIER Frontend Application Service 
 ```css
 web-tier-svc.web-tier.svc.cluster.local
 ```
-- Backend Application Service
+- APP-TIER Backend Application Service
 ```css
 app-tier-svc.app-tier.svc.cluster.local
 ```
+- TEST-TIER Testing pod with necessary tools !
  <img width="907" alt="image" src="https://user-images.githubusercontent.com/34051943/210194740-243bbfbb-b18c-4620-b732-4e6c822589fc.png">
  
 ## BUILDs Optional 
