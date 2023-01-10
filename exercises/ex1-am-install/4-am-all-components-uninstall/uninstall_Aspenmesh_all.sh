@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "*********Uninstalling Aspenmesh*********"
-sleep 1
+sleep 3
+helm -n istio-system uninstall 
+sleep 3
 helm -n istio-system uninstall istio-egress
 sleep 3
 helm -n istio-system uninstall istio-ingress
