@@ -1,11 +1,10 @@
 #!/bin/bash
-echo "*********Starting Aspen Mesh Installation*********"
+echo "*********Starting Aspen Mesh ALL Components Installation for UDF*********"
+cd /home/ubuntu
 sleep 2
 curl -L -k https://ec2-15-207-229-119.ap-south-1.compute.amazonaws.com/aspenmesh-carrier-grade-1.14.5-am1-linux.tar.gz  | tar -xz
 sleep 2
-sleep 2
 cp -r .kube aspenmesh-carrier-grade-1.14.5-am1/
-sleep 2
 cd aspenmesh-carrier-grade-1.14.5-am1 
 cat > values.yaml <<EOF
 aspen-mesh-controlplane:
@@ -52,18 +51,13 @@ aspen-mesh-metrics-collector:
 ##
 aspen-mesh-event-storage:
   enabled: true
-  resources:
-    requests:
-      memory: "512Mi"
-      cpu: "500m"
-    limits:
-      memory: "512Mi"
-      cpu: "500m"
   config:
     cluster_size: 1
     seed_size: 1
   persistence:
     enabled: false
+  max_heap_size: 2048M
+  heap_new_size: 512M
 ##
 jaeger:
   enabled: true
@@ -102,17 +96,19 @@ gateways:
   istio-egressgateway:
     autoscaleMin: 1
 EOF
+sleep 1
 kubectl create ns istio-system
 sleep 3
 helm install istio-base --namespace istio-system manifests/charts/base
-sleep 2
+sleep 3
 kubectl get crds | grep 'istio.io'
-sleep 2 
-helm install istiod manifests/charts/istio-control/istio-discovery --namespace istio-system --values values.yaml
+sleep 3 
+helm install istiod manifests/charts/istio-control/istio-discovery  --namespace istio-system --values values.yaml
 sleep 3
 helm install istio-egress manifests/charts/gateways/istio-egress --namespace istio-system --values values.yaml
 sleep 3
 helm install istio-ingress manifests/charts/gateways/istio-ingress --namespace istio-system --values values.yaml
 sleep 3
-helm -n istio-system install aspen-mesh-add-ons manifests/charts/addons --values values.yaml
-echo "*********Aspenmesh Installation Ends*********"
+helm install aspen-mesh-add-ons manifests/charts/addons --namespace istio-system --values values.yaml
+sleep 3
+echo "*********Aspenmesh ALL components Installation for UDF Ends*********"

@@ -1,8 +1,10 @@
 #!/bin/bash
-echo "*********Starting Aspen Mesh Installation*********"
+echo "*********Starting Aspen Mesh Installation for UDF*********"
+cd /home/ubuntu
 sleep 2
 curl -L -k https://ec2-15-207-229-119.ap-south-1.compute.amazonaws.com/aspenmesh-carrier-grade-1.14.5-am1-linux.tar.gz  | tar -xz
 sleep 2
+cp -r .kube aspenmesh-carrier-grade-1.14.5-am1/
 cd aspenmesh-carrier-grade-1.14.5-am1 
 cat > values.yaml <<EOF
 aspen-mesh-controlplane:
@@ -52,18 +54,18 @@ global:
   multiCluster:
     clusterName: cluster1
   network: network1
-gateways:
-  istio-ingressgateway:
-    type: NodePort
-    autoscaleMin: 1
-  istio-egressgateway:
-    autoscaleMin: 1
 EOF
+sleep 1
 kubectl create ns istio-system
 sleep 3
 helm install istio-base --namespace istio-system manifests/charts/base
-sleep 2
+sleep 3
 kubectl get crds | grep 'istio.io'
-sleep 2 
+sleep 3 
 helm install istiod manifests/charts/istio-control/istio-discovery  --namespace istio-system --values values.yaml
+sleep 3
+helm install istio-egress manifests/charts/gateways/istio-egress --namespace istio-system --values values.yaml
+sleep 3
+helm install istio-ingress manifests/charts/gateways/istio-ingress --namespace istio-system --values values.yaml
+sleep 3
 echo "*********Aspenmesh Installation Ends*********"
