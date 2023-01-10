@@ -11,12 +11,18 @@ web-tier-svc.web-tier.svc.cluster.local
 app-tier-svc.app-tier.svc.cluster.local
 ```
  <img width="907" alt="image" src="https://user-images.githubusercontent.com/34051943/210194740-243bbfbb-b18c-4620-b732-4e6c822589fc.png">
+ 
+## BUILDs Optional 
 
 ### K8s Install Single Node Cluster 
 ```css
+curl -s https://raw.githubusercontent.com/learnbyseven/amTraining/main/builds/k8install/k8singleNode-install.sh | bash
 ```
 ### k8s Uninstall
 ```css
+curl -s https://raw.githubusercontent.com/learnbyseven/amTraining/main/builds/k8-uninstall/k8-uninstall.sh | bash
+
+## Exercise 1 AM deployment
 ```
 ### aM-Install 
 ```css
