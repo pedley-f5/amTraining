@@ -79,3 +79,4 @@ echo "*************************************************"
 
 ## Additional 
 # echo "alias k='kubectl'" >> .bashrc && source .bashrc
+## NOTE : KUBERNETES DOESN"T LIKE ANY KIND OF SWAP PARTITION, HENCE TO FIX THIS permanently DISABLE SWAP PARTITION FROM FSTAB FILE (/etc/fstab) 
