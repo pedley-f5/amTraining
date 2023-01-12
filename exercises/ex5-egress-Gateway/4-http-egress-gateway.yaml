@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
  name: myapp-se
+ namespace: test-tier
 spec:
  hosts:
  - myapp.com
@@ -36,6 +37,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: directing-myapp-through-egress-gateway
+  namespace: test-tier
 spec:
   hosts:
   - myapp.com
@@ -69,6 +71,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   name: dr-eg-subset-myapp
+  namespace: test-tier
 spec:
   host: istio-egressgateway.istio-system.svc.cluster.local
   subsets:
