@@ -3,6 +3,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
  name: myapp-se
+ namespace: test-tier
 spec:
  hosts:
  - myapp.com
@@ -39,6 +40,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: direct-myapp-through-egress-gateway
+  namespace: test-tier
 spec:
   hosts:
   - myapp.com
@@ -72,6 +74,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   name: egressgateway-for-myapp
+  namespace: test-tier
 spec:
   host: istio-egressgateway.istio-system.svc.cluster.local
   subsets:
@@ -90,6 +93,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   name: originate-tls-for-edition-myapp-com
+  namespace: test-tier
 spec:
   host: myapp.com
   trafficPolicy:
