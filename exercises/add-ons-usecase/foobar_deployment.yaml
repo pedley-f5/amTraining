@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: foobar
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foobar
+  namespace: foobar
+  labels:
+    app: foobar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: foobar
+  template:
+    metadata:
+      labels:
+        app: foobar
+    spec:
+      containers:
+      - name: foobar
+        image: giriraj789/tester:v1
