@@ -1,0 +1,37 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: lb-simple-vs
+  namespace: app-tier
+spec:
+  hosts:
+    - app-tier-svc.app-tier.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: app-tier-svc.app-tier.svc.cluster.local
+        subset: v1
+    - destination:
+        host: app-tier-svc.app-tier.svc.cluster.local
+        subset: v2
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: app-dr-lb
+  namespace: app-tier
+spec:
+  host: app-tier-svc.app-tier.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: user
+          ttl: 0s
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
