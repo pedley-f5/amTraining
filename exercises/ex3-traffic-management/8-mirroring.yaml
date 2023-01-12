@@ -1,3 +1,4 @@
+## Long req generater command $seq 1 200 | xargs -n1 -P10  curl "http://app-tier-svc.app-tier.svc.cluster.local"
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -32,4 +33,3 @@ spec:
   - name: v2
     labels:
       version: v2
-
