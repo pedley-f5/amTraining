@@ -1,3 +1,5 @@
+##istioctl kube-inject -f foobar_deployment.yaml > foobar_deployment-with-istio-sidecar.yaml
+---
 apiVersion: v1
 kind: Namespace
 metadata:
