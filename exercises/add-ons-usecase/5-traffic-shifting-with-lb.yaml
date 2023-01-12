@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: vs-traffic-shifting
+  name: lb-simple-vs
   namespace: app-tier
 spec:
   hosts:
@@ -11,16 +11,14 @@ spec:
     - destination:
         host: app-tier-svc.app-tier.svc.cluster.local
         subset: v1
-      weight: 50
     - destination:
         host: app-tier-svc.app-tier.svc.cluster.local
         subset: v2
-      weight: 50
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: app-dr
+  name: app-dr-lb
   namespace: app-tier
 spec:
   host: app-tier-svc.app-tier.svc.cluster.local
