@@ -5,7 +5,7 @@ metadata:
   namespace: app-tier
 spec:
   hosts:
-    - myapp.com
+    - myapp.com ## 1
   http:
   - route:
     - destination:
@@ -18,7 +18,7 @@ metadata:
   namespace: app-tier
 spec:
   host: app-tier-svc.app-tier.svc.cluster.local
-  trafficPolicy:
+  trafficPolicy:  ## 2
     loadBalancer:
       consistentHash:
         httpCookie:
