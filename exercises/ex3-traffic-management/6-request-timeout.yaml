@@ -10,7 +10,7 @@ spec:
   - route:
     - destination:
         host: web-tier-svc.web-tier.svc.cluster.local
-    timeout: 1.5s
+    timeout: 1.5s ## Lower to 1s
 ---
 kind: VirtualService
 metadata:
@@ -23,7 +23,7 @@ spec:
   - fault:
       delay:
         percent: 100
-        fixedDelay: 1s
+        fixedDelay: 1s ## Raise to 1.5s
     route:
     - destination:
         host: app-tier-svc.app-tier.svc.cluster.local
