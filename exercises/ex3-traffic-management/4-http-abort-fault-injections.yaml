@@ -1,3 +1,4 @@
+## To test run this on test-tier $for i in {1..9}; do curl app-tier-svc.app-tier.svc.cluster.local -v; done
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
