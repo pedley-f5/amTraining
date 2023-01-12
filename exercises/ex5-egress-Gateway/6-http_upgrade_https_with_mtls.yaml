@@ -104,4 +104,5 @@ spec:
     - port:
         number: 443
       tls:
+        credentialName: mtls-credential
         mode: MUTUAL # initiates HTTPS for connections to myapp.com enabled with mTLS - For this your external server should be mTLS enabled
