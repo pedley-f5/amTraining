@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: lb-simple-vs
+  name: session-persistence-vs
   namespace: app-tier
 spec:
   hosts:
@@ -18,7 +18,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: app-dr-lb
+  name: session-persistence-dr
   namespace: app-tier
 spec:
   host: app-tier-svc.app-tier.svc.cluster.local
