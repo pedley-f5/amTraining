@@ -1,0 +1,107 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+ name: myapp-se
+ namespace: test-tier
+spec:
+ hosts:
+ - myapp.com
+ location: MESH_EXTERNAL
+ ports:
+ - number: 443
+   name: tls
+   protocol: TLS
+ resolution: DNS
+ endpoints:
+ - address: ec2-3-7-183-124.ap-south-1.compute.amazonaws.com
+   locality: green
+   ports:
+     tls: 443
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: istio-egressgateway
+  namespace: test-tier
+spec:
+  selector:
+    istio: egressgateway
+  servers:
+  - port:
+      number: 80
+      name: tls-port-for-tls-origination
+      protocol: HTTPS
+    hosts:
+    - myapp.com
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: direct-myapp-through-egress-gateway
+  namespace: test-tier
+spec:
+  hosts:
+  - myapp.com
+  gateways:
+  - istio-egressgateway
+  - mesh
+  http:
+  - match:
+    - gateways:
+      - mesh
+      port: 80
+    route:
+    - destination:
+        host: istio-egressgateway.istio-system.svc.cluster.local
+        subset: myapp
+        port:
+          number: 80
+      weight: 100
+  - match:
+    - gateways:
+      - istio-egressgateway
+      port: 80
+    route:
+    - destination:
+        host: myapp.com
+        port:
+          number: 443
+      weight: 100
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: egressgateway-for-myapp
+  namespace: test-tier
+spec:
+  host: istio-egressgateway.istio-system.svc.cluster.local
+  subsets:
+  - name: myapp
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN
+      portLevelSettings:
+      - port:
+          number: 80
+        tls:
+          mode: ISTIO_MUTUAL
+          sni: myapp.com
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: originate-tls-for-edition-myapp-com
+  namespace: test-tier
+spec:
+  host: myapp.com
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    portLevelSettings:
+    - port:
+        number: 443
+      tls:
+        mode: MUTUAL # initiates HTTPS for connections to myapp.com enabled with mTLS - For this your external server should be mTLS enabled
