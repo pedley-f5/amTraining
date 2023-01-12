@@ -24,9 +24,6 @@ metadata:
   namespace: app-tier
 spec:
   host: app-tier-svc.app-tier.svc.cluster.local
-  trafficPolicy:
-     loadBalancer: 
-        simple: ROUND_ROBIN
   subsets:
   - name: v1
     labels:
