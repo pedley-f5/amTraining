@@ -23,7 +23,7 @@ spec:
   hosts:
   - ec2-52-66-71-101.ap-south-1.compute.amazonaws.com
   gateways:
-  - db-gateway
+  - db-gateeway
   http:
   - match:
     - port: 80
