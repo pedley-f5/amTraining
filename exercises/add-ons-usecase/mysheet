@@ -1,4 +1,10 @@
 
-Prob-2 
+
+Prob-1
 503 exercise traffic shifting
 istioctl pc c app-tier-deployment-v1-d89564d68-66fln.app-tier --fqdn app-tier-svc.app-tier.svc.cluster.local
+
+Prob2-2
+IG DB exercise
+gateways: Ch - Route 
+
