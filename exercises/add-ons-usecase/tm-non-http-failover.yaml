@@ -5,7 +5,7 @@ metadata:
  namespace: test-tier
 spec:
  hosts:
- - mytierapp.com ## Internal URL 
+ - myapp.com ## Internal URL 
  location: MESH_EXTERNAL
  ports:
  - number: 22
