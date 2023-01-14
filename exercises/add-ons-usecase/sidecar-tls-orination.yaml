@@ -1,58 +1,23 @@
----
-# Service entry for external mTLS enabled service 
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
- name: myapp-se
- namespace: foobar
+ name: non-http-failover
+ namespace: test-tier
 spec:
  hosts:
- - myapp.com
+ - mytierapp.com
  location: MESH_EXTERNAL
  ports:
- - number: 443
-   name: tls
-   protocol: TLS
+ - number: 22
+ name: tcp
+ protocol: TCP
  resolution: DNS
  endpoints:
  - address: ec2-3-7-183-124.ap-south-1.compute.amazonaws.com
-   locality: green
-   ports:
-     tls: 443
-# Virtual Service for routing traffic from app-container to Istio-sidecar-proxy 
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: mtls-vs
-  namespace: foobar
-spec:
-  hosts:
-  - myapp.com
-  http:
-  - route:
-    - destination:
-        host: myapp.com
-        port:
-          number: 443
-
----
-# Destination rule for using custom certs attached as secrets/configmap on istio-sidecar-proxy 
-apiVersion: networking.istio.io/v1beta1
-kind: DestinationRule
-metadata:
-  name: mtls-dr
-  namespace: foobar
-spec:
-  host: myapp.com
-  trafficPolicy:
-    loadBalancer:
-      simple: ROUND_ROBIN
-    portLevelSettings:
-    - port:
-        number: 443
-      tls:
-        mode: MUTUAL
-        clientCertificate: /etc/certs/client.crt
-        privateKey: /etc/certs/client.key
-        caCertificates: /etc/certs/ca.crt
----
+ locality: green-dc1
+ ports:
+ tcp: 22
+ - address: ec2-15-207-229-119.ap-south-1.compute.amazonaws.com
+ locality: blue-dc-2
+ ports:
+ tcp: 22 
