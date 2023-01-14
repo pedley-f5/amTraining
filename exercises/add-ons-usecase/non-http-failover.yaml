@@ -5,19 +5,19 @@ metadata:
  namespace: test-tier
 spec:
  hosts:
- - mytierapp.com
+ - mytierapp.com ## Internal URL 
  location: MESH_EXTERNAL
  ports:
  - number: 22
- name: tcp
- protocol: TCP
+   name: tcp
+   protocol: TCP
  resolution: DNS
  endpoints:
  - address: ec2-3-7-183-124.ap-south-1.compute.amazonaws.com
- locality: green-dc1
- ports:
- tcp: 22
+   locality: green-dc1
+   ports:
+     tcp: 22
  - address: ec2-15-207-229-119.ap-south-1.compute.amazonaws.com
- locality: blue-dc-2
- ports:
- tcp: 22 
+   locality: blue-dc-2
+   ports:
+     tcp: 22 
