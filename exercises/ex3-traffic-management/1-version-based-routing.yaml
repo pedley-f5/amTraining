@@ -5,7 +5,7 @@ metadata:
   namespace: app-tier
 spec:
   hosts:
-  - myapp.local
+  - app-tier-svc.app-tier.svc.cluster.local
   http:
   - name: "app-v1-route"  
     route:
