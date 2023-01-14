@@ -11,7 +11,7 @@ spec:
   - match:
     - headers:
         user:
-          exact: ram
+          exact: internal
     route:
     - destination:
         host: app-tier-svc.app-tier.svc.cluster.local
