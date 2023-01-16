@@ -1,4 +1,4 @@
-## Test-command curl --header "user: ram" app-tier-svc.app-tier.svc.cluster.local
+## Test-command curl --header "user: ram" web-tier-svc.web-tier.svc.cluster.local
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
