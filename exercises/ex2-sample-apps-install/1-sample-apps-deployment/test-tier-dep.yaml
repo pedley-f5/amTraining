@@ -1,3 +1,5 @@
+##kubectl label ns test-tier istio-injection=enabled 
+##kubectl get ns -L istio-injection
 ---
 apiVersion: apps/v1
 kind: Deployment
