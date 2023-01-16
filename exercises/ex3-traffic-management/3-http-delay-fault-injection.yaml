@@ -8,11 +8,15 @@ spec:
   hosts:
   - app-tier-svc.app-tier.svc.cluster.local
   http:
+  - match:
+    - headers:
+        user:
+          exact: internal
   - fault:
       delay:
         fixedDelay: 7s
         percentage:
-           value: 50
+           value: 70
     route:
     - destination:
         host: app-tier-svc.app-tier.svc.cluster.local
