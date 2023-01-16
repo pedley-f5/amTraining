@@ -1,4 +1,4 @@
-## To test run this on the test-tier pod $for i in {1..5}; do time curl web-tier-svc.web-tier.svc.cluster.local; done
+## To test run this on the test-tier pod $for i in {1..5}; do time curl --header "user: internal" web-tier-svc.web-tier.svc.cluster.local; done
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
