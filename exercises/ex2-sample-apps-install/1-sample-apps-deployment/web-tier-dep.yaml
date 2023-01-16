@@ -1,6 +1,11 @@
 ##istioctl kube-inject -f web-tier-dep.yaml > web-tier-deployment-with-istio.yaml
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: web-tier
+---
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: nginx-conf
