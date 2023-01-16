@@ -12,6 +12,10 @@ spec:
     - headers:
         user:
           exact: internal
+    route:
+    - destination:
+        host: app-tier-svc.app-tier.svc.cluster.local
+        subset: v2
   - fault:
       delay:
         fixedDelay: 7s
