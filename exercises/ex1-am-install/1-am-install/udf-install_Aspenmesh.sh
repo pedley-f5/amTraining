@@ -77,7 +77,7 @@ helm install istio-ingress manifests/charts/gateways/istio-ingress --namespace i
 sleep 3
 cd /home/ubuntu/amTraining/
 sleep 3
-cp -r /home/ubuntu/.kube . /home/ubuntu/amTraining/
+cp -r /home/ubuntu/.kube . 
 sleep 3
 kubectl -n istio-system get pods
 echo "*********Aspenmesh Installation Ends Enjoy learning :) *********"
