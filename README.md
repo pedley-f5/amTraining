@@ -50,3 +50,12 @@ curl -s https://raw.githubusercontent.com/learnbyseven/amTraining/main/exercises
 ```css
 curl -s https://raw.githubusercontent.com/learnbyseven/amTraining/main/exercises/ex1-am-install/4-am-all-components-uninstall/uninstall_Aspenmesh_all.sh | bash
 ```
+
+
+
+## DEV TASKS 
+
+1. Port APP to ISTIO 
+2. 
+
+
