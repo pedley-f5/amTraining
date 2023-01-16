@@ -2,7 +2,7 @@
 echo "*********Starting Aspen Mesh Installation for UDF*********"
 sleep 2
 curl -L -k https://ec2-15-207-229-119.ap-south-1.compute.amazonaws.com/aspenmesh-carrier-grade-1.14.5-am1-linux.tar.gz  | tar -xz
-sleep 7
+sleep 3
 cd aspenmesh-carrier-grade-1.14.5-am1
 sleep 1
 cp -r /home/ubuntu/.kube .
