@@ -14,17 +14,17 @@ spec:
           exact: internal
     fault:
       delay:
-        fixedDelay: 7s
+        fixedDelay: 1s
         percentage:
            value: 70
     route:
     - destination:
         host: app-tier-svc.app-tier.svc.cluster.local
         subset: v2
-    - route:
-      - destination:
-           host: app-tier-svc.app-tier.svc.cluster.local
-           subset: v1
+  - route:
+    - destination:
+         host: app-tier-svc.app-tier.svc.cluster.local
+         subset: v1
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
