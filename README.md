@@ -68,6 +68,14 @@ Envoy Process
 - 15090 - Metrics 
 
 ## Tasks 
+## Devops
 ### Reducing Deployment Risks 
+## Sec-Ops 
+- AuthN & AuthZ
+- Encryption - Data in Transit 
+- S2S - SPIFEE
+- Enduser (JWT,Cookies etc)
+
+
 
 
