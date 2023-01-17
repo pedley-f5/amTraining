@@ -10,7 +10,14 @@ web-tier-svc.web-tier.svc.cluster.local
 ```css
 app-tier-svc.app-tier.svc.cluster.local
 ```
-PACKET-FLOW
+
+<img width="937" alt="image" src="https://user-images.githubusercontent.com/34051943/212862803-0ae6e2a7-4998-43c7-8206-1812a925521c.png">
+
+### Envoy Decoded 
+<img width="1129" alt="image" src="https://user-images.githubusercontent.com/34051943/212862934-5e64f095-8be3-475b-b770-c73c0ceff0c8.png">
+
+
+### PACKET-FLOW
 <img width="1264" alt="image" src="https://user-images.githubusercontent.com/34051943/212861736-0f6de294-09e9-4eea-925f-d1add65b40ac.png">
 
  
