@@ -6,17 +6,17 @@ metadata:
   namespace: app-tier
 spec:
   hosts:
-    - myapp.com
+  - web-tier-svc.web-tier.svc.cluster.local
   http:
   - route:
     - destination:
         host: app-tier-svc.app-tier.svc.cluster.local
         subset: v1
-      weight: 50
+      weight: 90
     - destination:
         host: app-tier-svc.app-tier.svc.cluster.local
         subset: v2
-      weight: 50
+      weight: 10
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
