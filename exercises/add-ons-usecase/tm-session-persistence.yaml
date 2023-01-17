@@ -5,7 +5,7 @@ metadata:
   namespace: app-tier
 spec:
   hosts:
-    - myapp.com ## 1
+  - myapp.com ## 1
   http:
   - route:
     - destination:
