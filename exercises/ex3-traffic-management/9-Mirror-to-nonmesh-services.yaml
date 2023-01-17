@@ -36,7 +36,7 @@ metadata:
   namespace: test-tier
 spec:
   hosts:
-    - myapp.com
+  - myapp.com
   http:
   - route:
     - destination:
