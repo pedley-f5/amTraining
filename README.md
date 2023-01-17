@@ -10,8 +10,9 @@ web-tier-svc.web-tier.svc.cluster.local
 ```css
 app-tier-svc.app-tier.svc.cluster.local
 ```
-- TEST-TIER Testing pod for initiating application traffic 
- <img width="907" alt="image" src="https://user-images.githubusercontent.com/34051943/210194740-243bbfbb-b18c-4620-b732-4e6c822589fc.png">
+PACKET-FLOW
+<img width="1264" alt="image" src="https://user-images.githubusercontent.com/34051943/212861736-0f6de294-09e9-4eea-925f-d1add65b40ac.png">
+
  
 ## BUILDs Optional 
 
