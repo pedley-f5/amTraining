@@ -53,9 +53,19 @@ curl -s https://raw.githubusercontent.com/learnbyseven/amTraining/main/exercises
 
 
 
-## DEV TASKS 
+## Some important Ports 
 
-1. Port APP to ISTIO 
-2. 
+Pilot Agent Process 
+- 15004 -> ISTIOD debug ep
+- 15020 -> Healthchecking, Metrics 
+- 15053 -> DNS
+Envoy Process
+- 15000 - Admin Interface
+- 15001 - Outbound Traffic 
+- 15006 - Inbound traffic 
+- 15021 - kube probes and metrics
+- 15090 - Metrics 
+
+
 
 
