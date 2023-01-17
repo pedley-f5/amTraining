@@ -59,6 +59,7 @@ Pilot Agent Process
 - 15004 -> ISTIOD debug ep
 - 15020 -> Healthchecking, Metrics 
 - 15053 -> DNS
+
 Envoy Process
 - 15000 - Admin Interface
 - 15001 - Outbound Traffic 
