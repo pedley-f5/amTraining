@@ -1,4 +1,5 @@
 ##istioctl kube-inject -f web-tier-dep.yaml > web-tier-deployment-with-istio.yaml
+## kubectl create -f web-tier-deployment-with-istio.yaml
 ---
 apiVersion: v1
 kind: Namespace
