@@ -1,3 +1,4 @@
+##kubectl create ns test-tier
 ##kubectl label ns test-tier istio-injection=enabled 
 ##kubectl get ns -L istio-injection
 ---
