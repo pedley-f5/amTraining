@@ -11,7 +11,7 @@ web-tier-svc.web-tier.svc.cluster.local
 app-tier-svc.app-tier.svc.cluster.local
 ```
 
-<img width="937" alt="image" src="https://user-images.githubusercontent.com/34051943/212862803-0ae6e2a7-4998-43c7-8206-1812a925521c.png">
+<img width="953" alt="image" src="https://user-images.githubusercontent.com/34051943/212863442-eb4f1ee3-597e-43d8-8ba7-a3ac280182af.png">
 
 ### Envoy Decoded 
 <img width="1129" alt="image" src="https://user-images.githubusercontent.com/34051943/212862934-5e64f095-8be3-475b-b770-c73c0ceff0c8.png">
@@ -61,29 +61,6 @@ curl -s https://raw.githubusercontent.com/learnbyseven/amTraining/main/exercises
 
 
 
-## Some important Ports 
-
-Pilot Agent Process 
-- 15004 -> ISTIOD debug ep
-- 15020 -> Healthchecking, Metrics 
-- 15053 -> DNS
-
-Envoy Process
-- 15000 - Admin Interface
-- 15001 - Outbound Traffic 
-- 15006 - Inbound traffic 
-- 15021 - kube probes and metrics
-- 15090 - Metrics 
-
-## Tasks 
-## Devops
-- Reducing Deployment Risks
-- Resilency  
-## Sec-Ops 
-- AuthN & AuthZ
-- Encryption - Data in Transit 
-- S2S - SPIFEE
-- Enduser (JWT,Cookies etc)
 
 
 
