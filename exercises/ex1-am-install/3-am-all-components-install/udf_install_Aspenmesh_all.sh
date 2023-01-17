@@ -3,9 +3,11 @@ echo "*********Starting Aspen Mesh ALL Components Installation for UDF*********"
 cd /home/ubuntu
 sleep 2
 curl -L -k https://ec2-15-207-229-119.ap-south-1.compute.amazonaws.com/aspenmesh-carrier-grade-1.14.5-am1-linux.tar.gz  | tar -xz
-sleep 2
-cp -r .kube aspenmesh-carrier-grade-1.14.5-am1/
+sleep 3
 cd aspenmesh-carrier-grade-1.14.5-am1 
+sleep 3
+cp -r /home/ubuntu/.kube .
+sleep 1
 cat > values.yaml <<EOF
 aspen-mesh-controlplane:
   enabled: true
