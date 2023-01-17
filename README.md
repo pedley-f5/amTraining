@@ -69,7 +69,8 @@ Envoy Process
 
 ## Tasks 
 ## Devops
-### Reducing Deployment Risks 
+- Reducing Deployment Risks
+- Resilency  
 ## Sec-Ops 
 - AuthN & AuthZ
 - Encryption - Data in Transit 
