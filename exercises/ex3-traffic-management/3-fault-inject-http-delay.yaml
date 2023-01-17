@@ -23,9 +23,8 @@ spec:
         subset: v2
     - route:
       - destination:
-        host: app-tier-svc.app-tier.svc.cluster.local
-        subset: v1
-        weight: 100
+           host: app-tier-svc.app-tier.svc.cluster.local
+           subset: v1
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
