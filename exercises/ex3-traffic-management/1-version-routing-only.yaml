@@ -4,13 +4,13 @@ metadata:
   name: version1-routing-vs
   namespace: app-tier
 spec:
-  hosts:
+  hosts: # Identification for receving req
   - app-tier-svc.app-tier.svc.cluster.local
   http:
   - name: "app-v1-route"  
     route:
     - destination:
-        host: app-tier-svc.app-tier.svc.cluster.local
+        host: app-tier-svc.app-tier.svc.cluster.local #Identification for sending req
         subset: v1
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -19,8 +19,8 @@ metadata:
   name: app-dr
   namespace: app-tier
 spec:
-  host: app-tier-svc.app-tier.svc.cluster.local 
-  subsets:
+  host: app-tier-svc.app-tier.svc.cluster.local # This should match to the VS route -->destination
+  subsets:   #End Points based on version
   - name: v1
     labels:
       version: v1
