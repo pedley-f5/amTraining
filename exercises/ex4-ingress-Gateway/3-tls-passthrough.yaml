@@ -13,7 +13,7 @@ spec:
     tls:
       mode: PASSTHROUGH
     hosts:
-    - ec2-52-66-71-101.ap-south-1.compute.amazonaws.com
+    - worker1.f5.local
 
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -23,14 +23,14 @@ metadata:
   namespace: myapp
 spec:
   hosts:
-  - ec2-52-66-71-101.ap-south-1.compute.amazonaws.com
+  - worker1.f5.local
   gateways:
   - myapp-gateway
   tls:
   - match:
     - port: 443
       sniHosts:
-      - ec2-52-66-71-101.ap-south-1.compute.amazonaws.com
+      - worker1.f5.local
     route:
     - destination:
         host: myapp.myapp.svc.cluster.local
