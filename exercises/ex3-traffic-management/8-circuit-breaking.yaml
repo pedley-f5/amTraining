@@ -1,4 +1,4 @@
-## test use $seq 1 200 | xargs -n1 -P10  curl "http://app-tier-svc.app-tier.svc.cluster.local"
+## test use $seq 1 200 | xargs -n1 -P10  curl -I "http://web-tier-svc.web-tier.svc.cluster.local"
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
