@@ -12,7 +12,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "ec2-52-66-71-101.ap-south-1.compute.amazonaws.com"
+    - "worker1.f5.com"
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -21,9 +21,9 @@ metadata:
   namespace: web-tier
 spec:
   hosts:
-  - ec2-52-66-71-101.ap-south-1.compute.amazonaws.com
+  - worker1.f5.com
   gateways:
-  - db-gateeway
+  - db-gateway
   http:
   - match:
     - port: 80
