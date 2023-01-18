@@ -1,3 +1,8 @@
+# Change /etc/hosts file with below entries 
+#10.1.1.4 master master.f5.local
+#10.1.1.5 worker1 worker1.f5.local
+#10.1.1.6 worker2 workeer2.f5.local
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
