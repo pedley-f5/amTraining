@@ -1,2 +1,1 @@
-kubectl create -n istio-system secret tls db-credential --key=2-myapp-deployment/certs/server.key  --cert=2-myapp-deployment/certs/server.crt
-
+kubectl -n istio-system create secret tls db-credential --key exercises/ex4-ingress-Gateway/2-myapp-deployment/certs/server.key  --cert exercises/ex4-ingress-Gateway/2-myapp-deployment/certs/server.crt
