@@ -26,7 +26,7 @@ spec:
   hosts:
   - worker1.f5.local
   gateways:
-  - db-securee-gw
+  - db-secure-gw
   http:
   - match:
     - port: 443
