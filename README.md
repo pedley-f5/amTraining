@@ -18,6 +18,7 @@ app-tier-svc.app-tier.svc.cluster.local
 
 ### PACKET-FLOW
 <img width="1264" alt="image" src="https://user-images.githubusercontent.com/34051943/212861736-0f6de294-09e9-4eea-925f-d1add65b40ac.png">
+<img width="989" alt="image" src="https://user-images.githubusercontent.com/34051943/213438872-a79f9487-aa71-40e6-b98d-8d8a94f3e0d6.png">
 
 ### Applying conf
 <img width="901" alt="image" src="https://user-images.githubusercontent.com/34051943/212995845-dc7d75f4-db5a-49eb-96e0-a4a9e7e040b3.png">
