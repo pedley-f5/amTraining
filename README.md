@@ -15,7 +15,8 @@ app-tier-svc.app-tier.svc.cluster.local
 
 ### Envoy Decoded 
 <img width="989" alt="image" src="https://user-images.githubusercontent.com/34051943/213438872-a79f9487-aa71-40e6-b98d-8d8a94f3e0d6.png">
-<img width="1129" alt="image" src="https://user-images.githubusercontent.com/34051943/212862934-5e64f095-8be3-475b-b770-c73c0ceff0c8.png">
+
+<img width="988" alt="image" src="https://user-images.githubusercontent.com/34051943/213439741-d0dbf92d-1984-4ab6-bc99-efac0aeec326.png">
 
 
 
