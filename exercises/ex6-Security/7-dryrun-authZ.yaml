@@ -1,4 +1,4 @@
-#set log level to debug $istioctl pc log istio-egressgateway-55c5f4f459-27fw9.istio-system --level rbac:debug
+#set log level to debug $istioctl pc log app-tier-deployment-v1-6f489c8589-4s2kz.app-tier --level rbac:debug
 #Optionalkubectl annotate --overwrite authorizationpolicies deny-path-headers -n foo istio.io/dry-run='true'
 #kubectl -n app-tier logs app-tier-deployment-v1-6f489c8589-4s2kz  -c istio-proxy | grep "shadow denied"
 apiVersion: security.istio.io/v1beta1
