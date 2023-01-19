@@ -1,0 +1,202 @@
+##Single click deployment Test-tier, Web-tier, App-tier
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-tier
+  labels:
+    istio-injection: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-tier
+  namespace: test-tier
+  labels:
+    app: test-tier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-tier
+  template:
+    metadata:
+      labels:
+        app: test-tier
+    spec:
+      containers:
+      - name: test-tier
+        image: giriraj789/tester:v1
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: web-tier
+  labels:
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+  namespace: web-tier
+data:
+  default.conf: |
+   server {
+     listen 80;
+     location / {
+        proxy_http_version 1.1;
+        proxy_pass http://app-tier-svc.app-tier.svc.cluster.local;
+               }
+          }
+   server {
+           listen 8080;
+           location /api {
+           api write=on;
+           allow 0.0.0.0/0;
+           deny  all;
+          }
+      location /dashboard.html {
+        root /usr/share/nginx/html;
+       }
+     }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-tier-deployment
+  namespace: web-tier
+spec:
+  selector:
+    matchLabels:
+      app: web-tier
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web-tier
+    spec:
+      containers:
+      - name: web-tier
+        image: giriraj789/np:v1
+        ports:
+        - containerPort: 80
+          name: http-web 
+        - containerPort: 8080
+          name: http-db
+        volumeMounts:
+            - name: nginx-conf
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+          items:
+            - key: default.conf
+              path: default.conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-tier-svc
+  namespace: web-tier
+spec:
+  ports:
+  - port: 80
+    name: http-web
+    targetPort: http-web
+    protocol: TCP
+  selector:
+    app: web-tier
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-svc
+  namespace: web-tier
+spec:
+  ports:
+  - port: 8080
+    name: http-db
+    targetPort: http-db
+    protocol: TCP
+  selector:
+    app: web-tier
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-tier
+  labels:
+    istio-injection: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-tier-deployment-v1
+  namespace: app-tier
+  labels:
+    app: app-tier
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-tier
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: app-tier
+        version: v1
+    spec:
+      containers:
+      - name: app-tier-v1
+        image: docker.io/giriraj789/informatica:v1
+        ports:
+        - containerPort: 80
+          name: http-v1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-tier-svc
+  namespace: app-tier
+spec:
+  selector:
+    app: app-tier
+  ports:
+    - name: http-svc
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-tier-deployment-v2
+  namespace: app-tier
+  labels:
+    app: app-tier
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-tier
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: app-tier
+        version: v2
+    spec:
+      containers:
+      - name: app-tier-v2
+        image: docker.io/giriraj789/informatica:v2
+        ports:
+        - containerPort: 80
+          name: http-v2
+ ---
