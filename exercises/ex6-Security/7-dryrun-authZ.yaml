@@ -1,3 +1,5 @@
+#set log level to debug $istioctl pc log istio-egressgateway-55c5f4f459-27fw9.istio-system --level rbac:debug
+#
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
