@@ -1,0 +1,39 @@
+## Gw-VS mismatch 
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: db-secure-gw
+  namespace: web-tier
+spec:
+  selector:
+    istio: ingressgateway # use istio default ingress gateway
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: db-credential # must be the same as secret
+    hosts:
+    - worker1.f5.local
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: dashboard-route-vs
+  namespace: web-tier
+spec:
+  hosts:
+  - worker1.f5.local
+  gateways:
+  - db-securee-gw
+  http:
+  - match:
+    - port: 443
+    route:
+    - destination:
+        host: dashboard-svc.web-tier.svc.cluster.local
+        port:
+          number: 8080
