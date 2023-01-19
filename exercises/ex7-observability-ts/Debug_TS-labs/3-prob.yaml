@@ -1,4 +1,4 @@
-## Gw-VS mismatch 
+## Gw-VS mis m
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
